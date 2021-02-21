@@ -64,8 +64,22 @@ const actualizarDatos = () => {
       return response.json();
     })
     .then((data) => {
-      const USD_INFO = data.bpi.USD;
-      priceElement.innerHTML = `${USD_INFO.code}${USD_INFO.symbol} ${USD_INFO.rate}`;
+
+      /* Jalo el select para usar el value con cada opcion que el usuario seleccione y
+      que cada que recargue se actualice el precio de la opcion seleccionada */
+      const options = document.querySelector("select");
+
+      // Realizo la condicion para que cada vez que seleccione se aplique el precio
+      if (options.value == "USD"){
+        const USD_INFO = data.bpi.USD;
+        priceElement.innerHTML = `${USD_INFO.code}${USD_INFO.symbol} ${USD_INFO.rate}`;
+      } else if (options.value == "GBP"){
+        const GBP_INFO = data.bpi.GBP;
+        priceElement.innerHTML = `${GBP_INFO.code}${GBP_INFO.symbol} ${GBP_INFO.rate}`;
+      } else if (options.value == "EUR"){
+        const EUR_INFO = data.bpi.EUR;
+        priceElement.innerHTML = `${EUR_INFO.code}${EUR_INFO.symbol} ${EUR_INFO.rate}`;
+      }
 
       // AQUI TENEMOS LA FECHA DENTRO DE data.time.updated
 
